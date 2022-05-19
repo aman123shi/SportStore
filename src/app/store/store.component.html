@@ -1,0 +1,79 @@
+<div class="container-fluied">
+  <div class="row">
+    <div class="col bg-dark text-white">
+      <a class="navbar-brand">Sports Store </a>
+      <cart-summary></cart-summary>
+    </div>
+  </div>
+  <div class="row text-white">
+    <div class=" col-3 p-2">
+      {{categories.length}} Categories 
+      <button class="btn btn-block btn-outline-primary text-dark" (click)="changeCategory()">
+        HOME
+      </button>
+      <button *ngFor="let cat of categories" [class.active]="cat == selectedCategory" (click)="changeCategory(cat)"
+        class="btn btn-block btn-outline-primary text-dark">
+        {{cat}}
+      </button>
+      <button class="btn btn-block btn-danger mt-5" routerLink="/admin">Admin</button>
+    </div>
+    <div class="col-9 bg-gray p-2">
+      <div class="container">
+        <div class="row">
+          <div *ngFor="let product of products" class="m-1  bg-light">
+              
+            <div class="col-4">
+              <div class="card" style="width: 18rem;">
+                <img src="assets/images/{{product.image}}" alt="" style="transition: 0.3s ease-in-out;max-height: 20vh;object-fit: contain;">
+                <h5 class="text-dark text-center" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;"><strong>{{product.name}}</strong></h5>
+                <p class="text-dark" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;max-width: 100ch;">{{product.description}}</p>
+                <p class="text-dark" ><strong>Price:</strong> ${{product.price}}</p>
+                <button class="btn btn-primary" (click)="addProductToCart(product)">Add to cart</button>
+            </div>
+            </div>
+              
+  
+          </div>
+        </div>
+        
+        <div class="form-inline float-left mr-1">
+          <select class="form-control" [value]="productsPerPage" (change)="changePageSize($event.target.value)">
+            <option value="3">3 Per Page</option>
+            <option value="4">4 Per Page</option>
+            <option value="5">5 Per Page</option>
+            <option value="8">8 Per Page</option>
+          </select>
+        </div>
+        <div class="btn-group float-right">
+          <button class="btn btn-outline-primary" *counter="let page of pageCount" (click)="changePage(page)"
+            [class.active]="page == selectedPage">
+            {{page}}
+          </button>
+        </div>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+<!-- 
+
+  <div class="card col-md-4">
+            <img [src]="'assets/images/'+product.image" alt="product.image" style="width: 60px;height: 70px;">
+            <h4 class="text-dark">
+              {{product.name}}
+              <span class="badge badge-pin badge-primary">
+                {{product.price | currency:"USD":"symbol":"2.2-2"}}
+              </span>
+            </h4>
+            <p class="text-dark">
+              {{product.description}}
+            </p>
+            <div class="card-text bg-white p-1 text-dark">
+              <button class="btn btn-sm btn-success " (click)="addProductToCart(product)">
+                Add To Cart
+              </button>
+            </div>
+          </div>
+
+-->
